@@ -1,0 +1,31 @@
+{
+  "name": "gulp-typed-markup",
+  "description": "Generate Typescript markup moduled from CSS",
+  "keywords": [
+    "typed markup",
+    "gulp",
+    "react",
+    "css",
+    "bem"
+  ],
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nocheinarbeiter/gulp-typed-markup.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nocheinarbeiter/gulp-typed-markup/issues"
+  },
+  "dependencies": {
+    "bem-classname-parser": "^1.0.2",
+    "css-selector-tokenizer": "^0.7.0",
+    "css-tokenize": "^1.0.1",
+    "from2-buffer": "^1.0.0",
+    "get-stream": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "through2": "^2.0.3",
+    "vinyl": "^2.1.0"
+  },
+  "devDependencies": {}
+}
