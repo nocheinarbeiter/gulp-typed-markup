@@ -1,0 +1,12 @@
+{
+  "include": [
+    "src/**/*"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "strict": true,
+    "module": "commonjs",
+    "target": "ES2016",
+    "outDir": "lib2"
+  }
+}
