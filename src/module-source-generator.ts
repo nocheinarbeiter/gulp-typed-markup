@@ -1,10 +1,10 @@
 import {BemEntry, BemEntryMods, BemModValue} from './types';
 
 
-export function generateModuleSource(fileName: string, bemEntries: BemEntry[]) {
+export function generateModuleSource(moduleName: string, bemEntries: BemEntry[]) {
     return concat(
         'import * as Markup from \'react-typed-markup\';',
-        `declare var require: any; require('./${fileName}.css');`,
+        `declare var require: any; require('./${moduleName}.css');`,
         '',
         bemEntries.map(generateFactoryFunction)
     );

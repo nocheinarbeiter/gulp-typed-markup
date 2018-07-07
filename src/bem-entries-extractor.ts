@@ -2,7 +2,7 @@ import * as BemParser from 'bem-classname-parser';
 import {ClassEntry, BemEntry, BemEntryMods, BemModValue} from './types';
 
 
-function getBemEntries(classEntries: ClassEntry[]): BemEntry[] {
+export function getBemEntries(classEntries: ClassEntry[]): BemEntry[] {
     var primaryBlock: string | undefined;
     var elemList: string[] = [];
     var modsMap: {[elemName: string]: BemEntryMods} = {};

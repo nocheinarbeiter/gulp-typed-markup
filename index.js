@@ -1,5 +1,5 @@
 var pathUtil = require('path');
-var createTransformStream = require('./lib/create-transform-stream');
+var createTransformStream = require('./lib/vinyl-transform-stream-creator');
 var generateFactoryModule = require('./lib/generate-markup-module');
 
 

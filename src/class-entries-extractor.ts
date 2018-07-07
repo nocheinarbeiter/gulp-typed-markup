@@ -3,7 +3,7 @@ import * as SelectorTokenizer from 'css-selector-tokenizer';
 import {ClassEntry} from './types';
 
 
-function getClassEntries(cssRules: string[]): ClassEntry[] {
+export function getClassEntries(cssRules: string[]): ClassEntry[] {
     var entries: ClassEntry[] = [];
     for (var rule of cssRules) {
         fillClassEntriesForSelectors(SelectorTokenizer.parse(rule).nodes, entries);
