@@ -1,3 +1,10 @@
 declare module 'through2-filter' {
-    export default function <T>(filter: (chunk: T) => boolean): NodeJS.ReadWriteStream;
+    interface Through2Filter {
+        <T>(filter: (chunk: T) => boolean): NodeJS.ReadWriteStream;
+    }
+    interface ExportingModule extends Through2Filter {
+        obj: Through2Filter;
+    }
+    const exportingModule: ExportingModule;
+    export = exportingModule;
 }

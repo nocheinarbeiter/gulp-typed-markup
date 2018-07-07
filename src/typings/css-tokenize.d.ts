@@ -1,3 +1,4 @@
 declare module 'css-tokenize' {
-    export default function (): NodeJS.ReadWriteStream;
+    function tokenizeStylesheet(): NodeJS.ReadWriteStream;
+    export = tokenizeStylesheet;
 }
