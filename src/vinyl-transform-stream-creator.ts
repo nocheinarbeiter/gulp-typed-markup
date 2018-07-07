@@ -9,26 +9,24 @@ export type BufferFile = {
     contents: Buffer;
 }
 
-// export type TransformFn = (file: BufferFile) => Promise<BufferFile>;
-// такой вариант не прокатывает — если внутри catch у промиса вызывать done('error') или emit('error'),
-// то получим unhandlerd promise rejection
-
-export type TransformFn = (file: BufferFile, cb: (error: Error | null, result?: BufferFile) => void) => void;
-// это все равно не помогает, нужно вызывать callback с ошибкой в nextTick
+export type TransformFn = (file: BufferFile) => Promise<BufferFile>;
 
 export function createTransformStream(pluginName: string, transformFn: TransformFn) {
-    return through.obj(function (file, enc, done) {
+    return through.obj((file, enc, done) => {
         if (file.isStream()) {
             done(new PluginError(pluginName, 'Streams are not supported'));
             return;
         }
         if (file.isBuffer()) {
-            transformFn(file, (err, result) =>
-                err ?
-                    done(new PluginError(pluginName, err))
-                    :
-                    done(null, new Vinyl(result))
-            );
+            transformFn(file)
+                .then(result => done(null, new Vinyl(result)))
+                .catch(error =>
+                    // *** don't do this:
+                    // done(new PluginError(pluginName, error))
+                    // *** done(error) called immediately causes unhandled promise rejection (node 8.9.4)
+                    process.nextTick(() => done(new PluginError(pluginName, error)))
+                )
+            ;
             return;
         }
         // file.isNull(), etc

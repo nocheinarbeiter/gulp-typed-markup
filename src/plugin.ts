@@ -5,17 +5,11 @@ import {getModuleSource} from './';
 
 function gulpReactMarkup(options: {suffix?: string}) {
     var fileNameSuffix = (options && options.suffix) || '';
-    return (
-        createTransformStream('gulp-react-markup', ({base, path, contents}, cb) =>
-            getModuleSource(extractName(path), contents)
-                .then(moduleSource => cb(null, {
-                    base,
-                    path: changePathExtension(path, fileNameSuffix + '.ts'),
-                    contents: new Buffer(moduleSource)
-                }))
-                .catch(err => process.nextTick(() => cb(err)))
-        )
-    );
+    return createTransformStream('gulp-react-markup', async ({base, path, contents}) => ({
+        base,
+        path: changePathExtension(path, fileNameSuffix + '.ts'),
+        contents: new Buffer(await getModuleSource(extractName(path), contents))
+    }));
 }
 export = gulpReactMarkup;
 
